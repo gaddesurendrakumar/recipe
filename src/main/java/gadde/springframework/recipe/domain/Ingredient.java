@@ -2,6 +2,7 @@ package gadde.springframework.recipe.domain;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+
 @Entity
 public class Ingredient {
 
@@ -13,8 +14,8 @@ public class Ingredient {
 
     @ManyToOne
     private Recipe recipe;
-    @OneToOne
-    private UnitOfMeasure unitOfMeasure;
+    @OneToOne(fetch = FetchType.EAGER)
+    private UnitOfMeasure uom;
 
     public Long getId() {
         return id;
@@ -31,6 +32,7 @@ public class Ingredient {
     public void setDescription(String description) {
         this.description = description;
     }
+
     public BigDecimal getAmount() {
         return amount;
     }
@@ -45,5 +47,13 @@ public class Ingredient {
 
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
+    }
+
+    public UnitOfMeasure getUom() {
+        return uom;
+    }
+
+    public void setUom(UnitOfMeasure uom) {
+        this.uom = uom;
     }
 }
