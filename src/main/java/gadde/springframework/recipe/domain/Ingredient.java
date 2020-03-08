@@ -31,7 +31,6 @@ public class Ingredient {
     public void setDescription(String description) {
         this.description = description;
     }
-
     public BigDecimal getAmount() {
         return amount;
     }
