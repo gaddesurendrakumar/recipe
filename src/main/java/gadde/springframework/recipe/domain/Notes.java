@@ -1,11 +1,10 @@
 package gadde.springframework.recipe.domain;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+
 @Data
-@EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Notes {
 
@@ -15,9 +14,14 @@ public class Notes {
 
     @OneToOne
     private Recipe recipe;
-
     @Lob
     private String recipeNotes;
 
+    public Notes() {
+    }
+
+    protected boolean canEqual(final Object other) {
+        return other instanceof Notes;
+    }
 
 }
