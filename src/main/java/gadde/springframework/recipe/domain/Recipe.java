@@ -35,9 +35,6 @@ public class Recipe {
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
-
-    
-
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
     }
