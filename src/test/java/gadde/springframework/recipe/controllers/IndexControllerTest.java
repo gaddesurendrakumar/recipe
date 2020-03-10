@@ -59,4 +59,6 @@ class IndexControllerTest {
         mockMvc.perform(get("/")).andExpect(view().name("index")).andExpect(status().isOk());
 
     }
+
+
 }
