@@ -1,5 +1,7 @@
 package gadde.springframework.recipe.services;
 
+import gadde.springframework.recipe.converters.RecipeCommandToRecipe;
+import gadde.springframework.recipe.converters.RecipeToRecipeCommand;
 import gadde.springframework.recipe.domain.Recipe;
 import gadde.springframework.recipe.repositories.RecipeRepository;
 import org.junit.jupiter.api.Assertions;
@@ -20,12 +22,17 @@ class RecipesServiceImplTest {
     RecipesServiceImpl recipeService;
     @Mock
     RecipeRepository recipeRepository;
+    @Mock
+    RecipeToRecipeCommand recipeToRecipeCommand;
+
+    @Mock
+    RecipeCommandToRecipe recipeCommandToRecipe;
 
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        recipeService = new RecipesServiceImpl(recipeRepository);
+        recipeService = new RecipesServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
     }
 
     @Test
