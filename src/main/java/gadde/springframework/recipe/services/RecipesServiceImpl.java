@@ -4,6 +4,7 @@ import gadde.springframework.recipe.commands.RecipeCommand;
 import gadde.springframework.recipe.converters.RecipeCommandToRecipe;
 import gadde.springframework.recipe.converters.RecipeToRecipeCommand;
 import gadde.springframework.recipe.domain.Recipe;
+import gadde.springframework.recipe.exception.NotFoundException;
 import gadde.springframework.recipe.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,7 @@ public class RecipesServiceImpl implements RecipeService {
         Optional<Recipe> recipeOptional = recipeRepository.findById(l);
 
         if (!recipeOptional.isPresent()) {
-            throw new RuntimeException("Recipe Not Found!");
+            throw new NotFoundException("Recipe Not Found! for the ID:"+l);
         }
 
         return recipeOptional.get();
@@ -52,6 +53,16 @@ public class RecipesServiceImpl implements RecipeService {
         Recipe recipeSaved = recipeRepository.save(detachedRecipe);
         log.debug("Saved Recipe {}",recipeSaved.getId());
         return recipeToRecipeCommand.convert(recipeSaved);
+    }
+
+    @Override
+    public RecipeCommand findCommandById(Long l) {
+        return recipeToRecipeCommand.convert(findById(l));
+    }
+
+    @Override
+    public void deleteById(Long idToDelete) {
+        recipeRepository.deleteById(idToDelete);
     }
 
 
